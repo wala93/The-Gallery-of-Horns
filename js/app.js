@@ -67,7 +67,7 @@ $('select').on('change', filter);
 function filter (event){
   event.preventDefault();
   $('div').hide();
- arrOfObj.forEach ( element => {
+  arrOfObj.forEach ( element => {
     if(element.keyword === $(this).val()){
 
 
