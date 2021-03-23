@@ -95,13 +95,13 @@
 'use strict';
 
 //global variables
-const pageOne = '../data/page-1.json';
-const pageTwo = '../data/page-2.json';
+const pageOne = './data/page-1.json';
+const pageTwo = './data/page-2.json';
 
-//global array to hold animals
+
 let arrOfObj = [];
 
-//constructor function
+
 function NewHorn(obj) {
   for(let key in obj){
     this[key] = obj[key];
@@ -134,7 +134,7 @@ const readJson = (pageNumber) => {
 
 //read global array activate render
 const loadAnimals = () => {
- arrOfObj.forEach(animal => {
+  arrOfObj.forEach(animal => {
 
     $('main').append(animal.toHtml());
   });
@@ -181,7 +181,7 @@ let pageTwoSelector = () => {
 
 //Sort functions
 let titleSort = () => {
-arrOfObj.forEach( () => {
+  arrOfObj.forEach( (element) => {
     arrOfObj.sort( (a,b) => {
       if(a.title < b.title){
         return -1;
@@ -198,8 +198,8 @@ arrOfObj.forEach( () => {
 };
 
 let hornSort = () => {
-arrOfObj.forEach( () => {
-   arrOfObj.sort( (a,b) => {
+  arrOfObj.forEach( (element) => {
+    arrOfObj.sort( (a,b) => {
       return a.horns - b.horns;
     });
     return arrOfObj;
