@@ -1,2 +1,7 @@
-img {width : 100px;
+
+ @import url('layout.css') ;
+
+
+
+ img {width : 100px;
 height: auto;}

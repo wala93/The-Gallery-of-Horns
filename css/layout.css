@@ -1,0 +1,7 @@
+div{
+    display: inline-block;
+    float: left;
+    margin: 35px;
+}
+
+*{box-sizing: border-box;}
