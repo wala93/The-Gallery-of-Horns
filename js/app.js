@@ -15,9 +15,11 @@ $.ajax('./data/page-1.json', ajaxSettings).then((arr) => {
     let newObj=new NewHorn(horn).render();
 
   });
+
   checkkeywords();
 
 });
+
 
 
 
@@ -34,7 +36,7 @@ function NewHorn (horn){
 
 
 NewHorn.prototype.render = function () {
-let option = $('option').clone();
+  // let option = $('option').clone();
   let $divClone = $('#template').clone();
   $('main').append($divClone);
   $divClone.find('h2').text(this.title);
@@ -49,11 +51,11 @@ let option = $('option').clone();
 
 
 
-function checkkeywords(arr){
+function checkkeywords(){
   arrOfObj.forEach(element=>{
-    if(!arrOfKeyword.includes(element.keyword)){
+    if(!(arrOfKeyword.includes(element.keyword))){
       arrOfKeyword.push(element.keyword);
-      $('select').append('<option value ='+ element.keyword + '>'+ element.keyword +'</option>');
+      $('select').append(`<option>${element.keyword}</option>`);
     }
   });
 }
@@ -64,18 +66,19 @@ $('select').on('change', filter);
 
 function filter (event){
   event.preventDefault();
-  $('section').hide();
-  let filterArr=[];
-  let selectedImg = $('option:selected').val();
-  arrOfObj.forEach(element => {
-    if (selectedImg === element.keyword){
-      console.log(selectedImg);
-      filterArr.push(element);
-      console.log(filterArr);
-      $('.'+selectedImg).show();
+  $('div').hide();
+ arrOfObj.forEach ( element => {
+    if(element.keyword === $(this).val()){
 
+
+      let pickedOne =  $(this).val();
+      $(`.${pickedOne}`).show();
     }
+
   }
   );
 
 }
+
+
+
