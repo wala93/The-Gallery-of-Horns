@@ -15,7 +15,7 @@ Estimate of time needed to complete: __2 hour___
 
 Start time: _2:00 am____
 
-Finish time: __3:30 am___
+Finish time: __3:00 am___
 
 Actual time needed to complete: __one hour and half  and not complete___
 
