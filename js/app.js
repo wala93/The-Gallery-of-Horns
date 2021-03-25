@@ -16,7 +16,12 @@
 //   arr.forEach((horn) => {
 //     let newObj=new NewHorn(horn).render();
 
+
 //   });
+
+
+  checkkeywords();
+
 
 //   checkkeywords();
 
@@ -24,6 +29,15 @@
 
 
 
+
+
+function NewHorn (horn){
+  this.image_url=horn.image_url;
+  this.title=horn.title;
+  this.description=horn.description;
+  this.keyword=horn.keyword;
+  this.hornsNum=horn.horns;
+  arrOfObj.push(this);
 
 
 // // function NewHorn (horn){
@@ -103,6 +117,7 @@ const ajaxSettings = {
   dataType: 'json',
 };
 
+
 let arrOfObj = [];
 let page1Data=[];
 let page2Data=[];
@@ -149,6 +164,7 @@ const renderHorns = () => {
   });
   dropDrown();
 };
+
 
 //function to build and display dropdown menu
 const dropDrown = () => {
@@ -208,6 +224,21 @@ let titleSort = () => {
   $('div').remove();
   renderHorns();
 };
+
+// function filter (event){
+//   event.preventDefault();
+//   $('div').hide();
+//   arrOfObj.forEach ( element => {
+//     if(element.keyword === $(this).val()){
+
+
+//       let pickedOne =  $(this).val();
+//       $(`.${pickedOne}`).show();
+//     }
+
+//   }
+//   );
+
 
 let hornSort = () => {
   arrOfObj.forEach( (horn) => {
