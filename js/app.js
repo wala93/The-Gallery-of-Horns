@@ -73,6 +73,7 @@ function filter (event){
 
       let pickedOne =  $(this).val();
       $(`.${pickedOne}`).show();
+
     }
 
   }
