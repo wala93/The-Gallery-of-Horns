@@ -20,7 +20,7 @@
 //   });
 
 
-  checkkeywords();
+// checkkeywords();
 
 
 //   checkkeywords();
@@ -31,13 +31,13 @@
 
 
 
-function NewHorn (horn){
-  this.image_url=horn.image_url;
-  this.title=horn.title;
-  this.description=horn.description;
-  this.keyword=horn.keyword;
-  this.hornsNum=horn.horns;
-  arrOfObj.push(this);
+// function NewHorn (horn){
+//   this.image_url=horn.image_url;
+//   this.title=horn.title;
+//   this.description=horn.description;
+//   this.keyword=horn.keyword;
+//   this.hornsNum=horn.horns;
+//   arrOfObj.push(this);
 
 
 // // function NewHorn (horn){
@@ -55,6 +55,7 @@ function NewHorn (horn){
 //   for(let key in horn){
 //     this[key] = horn[key];
 //   }
+//    arrOfObj.push(this);
 // }
 
 
