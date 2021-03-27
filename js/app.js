@@ -1,111 +1,3 @@
-// /* eslint-disable no-undef */
-// 'use strict';
-
-// let arrOfObj=[];
-// let arrOfKeyword=[];
-
-// const pageOne = '../data/page-1.json';
-// const pageTwo = '../data/page-2.json';
-
-// const ajaxSettings = {
-//   method: 'get',
-//   dataType: 'json',
-// };
-
-// $.ajax('./data/page-1.json', ajaxSettings).then((arr) => {
-//   arr.forEach((horn) => {
-//     let newObj=new NewHorn(horn).render();
-
-
-//   });
-
-
-// checkkeywords();
-
-
-//   checkkeywords();
-
-// });
-
-
-
-
-
-// function NewHorn (horn){
-//   this.image_url=horn.image_url;
-//   this.title=horn.title;
-//   this.description=horn.description;
-//   this.keyword=horn.keyword;
-//   this.hornsNum=horn.horns;
-//   arrOfObj.push(this);
-
-
-// // function NewHorn (horn){
-// //   this.image_url=horn.image_url;
-// //   this.title=horn.title;
-// //   this.description=horn.description;
-// //   this.keyword=horn.keyword;
-// //   this.hornsNum=horn.horns;
-// //   arrOfObj.push(this);
-
-// // }
-
-
-// function NewHorn(horn) {
-//   for(let key in horn){
-//     this[key] = horn[key];
-//   }
-//    arrOfObj.push(this);
-// }
-
-
-// NewHorn.prototype.render = function () {
-//   // let option = $('option').clone();
-//   let $divClone = $('#template').clone();
-//   $('main').append($divClone);
-//   $divClone.find('h2').text(this.title);
-//   $divClone.find('img').attr('src', this.image_url);
-//   $divClone.find('p').text(`${this.description} , the horns no. is ${this.horns}`);
-//   $divClone.removeClass('#template');
-//   $divClone.attr('class', this.keyword);
-//   $('main').append($divClone);
-
-
-// };
-
-
-
-// function checkkeywords(){
-//   arrOfObj.forEach(element=>{
-//     if(!(arrOfKeyword.includes(element.keyword))){
-//       arrOfKeyword.push(element.keyword);
-//       $('select').append(`<option>${element.keyword}</option>`);
-//     }
-//   });
-// }
-// console.log(arrOfKeyword);
-
-
-// $('select').on('change', filter);
-
-// function filter (event){
-//   event.preventDefault();
-//   $('div').hide();
-//   arrOfObj.forEach ( element => {
-//     if(element.keyword === $(this).val()){
-
-
-//       let pickedOne =  $(this).val();
-//       $(`.${pickedOne}`).show();
-//     }
-
-//   }
-//   );
-
-// }
-
-
-
 
 'use strict';
 
@@ -184,11 +76,11 @@ const dropDrown = () => {
 };
 
 
-let filter= (event) => {
-  $('div').hide();
-  let img = $(`img[value="${event.target.value}"]`).parent();
-  $(img).show();
-};
+// let filter= (event) => {
+//   $('div').hide();
+//   let img = $(`img[value="${event.target.value}"]`).parent();
+//   $(img).show();
+// };
 
 
 $('#dropDown').on('change', filter);
@@ -226,19 +118,20 @@ let titleSort = () => {
   renderHorns();
 };
 
-// function filter (event){
-//   event.preventDefault();
-//   $('div').hide();
-//   arrOfObj.forEach ( element => {
-//     if(element.keyword === $(this).val()){
+function filter (event){
+  event.preventDefault();
+  $('div').hide();
+  arrOfObj.forEach ( element => {
+    if(element.keyword === $(this).val()){
 
 
-//       let pickedOne =  $(this).val();
-//       $(`.${pickedOne}`).show();
-//     }
+      let pickedOne =  $(this).val();
+      $(`.${pickedOne}`).show();
+    }
 
-//   }
-//   );
+  }
+  );
+}
 
 
 let hornSort = () => {
