@@ -77,8 +77,8 @@ const renderHorns = () => {
 
 
 //function to build and display dropdown menu
-const dropDrown = () => {
-  arrOfObj.forEach(horn => {
+const dropDrown1 = () => {
+  page1Data.forEach(horn => {
     let exists = false;
     $('#dropDown option').each(function(){
       if(this.value === horn.keyword){
@@ -92,6 +92,20 @@ const dropDrown = () => {
   });
 };
 
+const dropDrown2 = () => {
+  page2Data.forEach(horn => {
+    let exists = false;
+    $('#dropDown option').each(function(){
+      if(this.value === horn.keyword){
+        exists = true;
+      }
+    });
+    if(exists === false){
+
+      $('select').append(horn.toDropdown());
+    }
+  });
+};
 
 // let filter= (event) => {
 //   $('div').hide();
@@ -100,20 +114,22 @@ const dropDrown = () => {
 // };
 
 
-$('#dropDown').on('change', filter);
+$('#dropDown').on('change', filter1);
 
+$('#dropDown').on('change', filter2);
 
 function pageOneSelector (pageNum) {
 
   $('div').remove();
   getJsonData(pageOne);
-
+dropDrown1();
 }
 
 let pageTwoSelector = () => {
 
   $('div').remove();
   getJsonData(pageTwo);
+  dropDrown2();
 };
 
 
@@ -135,10 +151,10 @@ let titleSort = () => {
   renderHorns();
 };
 
-function filter (event){
+function filter1 (event){
   event.preventDefault();
   $('div').hide();
-  arrOfObj.forEach ( element => {
+ page1Data.forEach ( element => {
     if(element.keyword === $(this).val()){
 
 
@@ -150,6 +166,20 @@ function filter (event){
   );
 }
 
+function filter2 (event){
+  event.preventDefault();
+  $('div').hide();
+ page2Data.forEach ( element => {
+    if(element.keyword === $(this).val()){
+
+
+      let pickedOne =  $(this).val();
+      $(`.${pickedOne}`).show();
+    }
+
+  }
+  );
+}
 
 let hornSort = () => {
   arrOfObj.forEach( (horn) => {
@@ -172,3 +202,4 @@ $('#hornsNum').on('click', hornSort);
 
 //default page if no selection
 $(() => getJsonData(pageOne));
+  
