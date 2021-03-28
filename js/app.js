@@ -18,37 +18,54 @@ let page2Data=[];
 function NewHorn(obj) {
   for(let key in obj){
     this[key] = obj[key];
-
+arrOfObj.push(this);
   }
 }
 // console.log(arrOfObj);
 
-NewHorn.prototype.toHtml = function() {
+NewHorn.prototype.rendertoHtml = function() {
   let template = $('#img-template').html();
   let html = Mustache.render(template,this);
-  return html;
+  // return html;
+  $('#img-template').append(html);
 };
 
 NewHorn.prototype.toDropdown = function() {
   let template = $('#keywordList').html();
   let html = Mustache.render(template,this);
   return html;
+  // #img-template
 };
 // read json
 
 
-function getJsonData (pageNumber) {
+// function getJsonData (pageNumber) {
 
-  arrOfObj = [];
-  $.get(pageNumber)
-    .then(hornData => {
-      hornData.forEach(horn => {
-        arrOfObj.push(new NewHorn(horn));
-      });
-    })
-    .then(titleSort);
-}
+//   arrOfObj = [];
+//   $.get(pageNumber)
+//     .then(hornData => {
+//       hornData.forEach(horn => {
+//         arrOfObj.push(new NewHorn(horn));
+//       });
+//     })
+//     .then(titleSort);
+// }
 
+$.ajax("data/page-1.json", ajaxSettings).then((data) => {
+  data.forEach((horn) => {
+      let hornObject = new Horns(horn);
+      // render the create horn object
+      page1Data.push(hornObject);
+      // hornObject.renderWithMustache1();
+  });
+
+  $.ajax("data/page-2.json", ajaxSettings).then((data) => {
+    data.forEach((horn) => {
+        let hornObject = new Horns(horn);
+        // render the create horn object
+        objArr2.push(hornObject);
+        // hornObject.renderWithMustache1();
+    });
 //this function to render the objects (horns)
 const renderHorns = () => {
   arrOfObj.forEach(horn => {
