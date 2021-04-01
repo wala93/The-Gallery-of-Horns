@@ -190,6 +190,7 @@ let hornSort = () => {
     });
     return arrOfObj;
   });
+
   $('div').remove();
   renderHorns();
 };
