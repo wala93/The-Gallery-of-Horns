@@ -18,7 +18,7 @@ let page2Data=[];
 function NewHorn(obj) {
   for(let key in obj){
     this[key] = obj[key];
-arrOfObj.push(this);
+    arrOfObj.push(this);
   }
 }
 // console.log(arrOfObj);
@@ -34,45 +34,51 @@ NewHorn.prototype.toDropdown = function() {
   let template = $('#keywordList').html();
   let html = Mustache.render(template,this);
   return html;
-  // #img-template
+
 };
-// read json
 
 
-// function getJsonData (pageNumber) {
-
-//   arrOfObj = [];
-//   $.get(pageNumber)
-//     .then(hornData => {
-//       hornData.forEach(horn => {
-//         arrOfObj.push(new NewHorn(horn));
-//       });
-//     })
-//     .then(titleSort);
-// }
-
-$.ajax("data/page-1.json", ajaxSettings).then((data) => {
-  data.forEach((horn) => {
-      let hornObject = new Horns(horn);
+let keywordOne=[];
+function getJsonData1 (data){
+  $.ajax('data/page-1.json', ajaxSettings).then((data) => {
+    data.forEach((horn) => {
+      let hornObject = new NewHorn(horn);
       // render the create horn object
       page1Data.push(hornObject);
       // hornObject.renderWithMustache1();
-  });
+      if(!keywordOne.includes(horn.keyword)){
+        keywordOne.push(horn.keyword);}
+      $('select').append('<option value ='+ horn.keyword + '>'+ horn.keyword +'</option>');
 
-  $.ajax("data/page-2.json", ajaxSettings).then((data) => {
-    data.forEach((horn) => {
-        let hornObject = new Horns(horn);
-        // render the create horn object
-        objArr2.push(hornObject);
-        // hornObject.renderWithMustache1();
     });
+    dropDrown1();
+  });
+}
+
+let keywordTwo=[];
+function getJsonData2 (data){
+  $.ajax('data/page-2.json', ajaxSettings).then((data) => {
+    data.forEach((horn) => {
+      let hornObject = new NewHorn(horn);
+      page2Data.push(hornObject);
+      // hornObject.renderWithMustache1();
+      if(!keywordTwo.includes(horn.keyword)){
+        keywordTwo.push(horn.keyword);}
+      $('select').append('<option value ='+ horn.keyword + '>'+ horn.keyword +'</option>');
+
+    });
+    dropDrown2();
+  });
+}
+
+
 //this function to render the objects (horns)
 const renderHorns = () => {
   arrOfObj.forEach(horn => {
 
     $('main').append(horn.toHtml());
   });
-  dropDrown();
+  dropDrown2();
 };
 
 
@@ -107,11 +113,6 @@ const dropDrown2 = () => {
   });
 };
 
-// let filter= (event) => {
-//   $('div').hide();
-//   let img = $(`img[value="${event.target.value}"]`).parent();
-//   $(img).show();
-// };
 
 
 $('#dropDown').on('change', filter1);
@@ -121,14 +122,14 @@ $('#dropDown').on('change', filter2);
 function pageOneSelector (pageNum) {
 
   $('div').remove();
-  getJsonData(pageOne);
-dropDrown1();
+  getJsonData1(pageOne);
+  dropDrown1();
 }
 
 let pageTwoSelector = () => {
 
   $('div').remove();
-  getJsonData(pageTwo);
+  getJsonData2(pageTwo);
   dropDrown2();
 };
 
@@ -154,7 +155,7 @@ let titleSort = () => {
 function filter1 (event){
   event.preventDefault();
   $('div').hide();
- page1Data.forEach ( element => {
+  page1Data.forEach ( element => {
     if(element.keyword === $(this).val()){
 
 
@@ -169,7 +170,7 @@ function filter1 (event){
 function filter2 (event){
   event.preventDefault();
   $('div').hide();
- page2Data.forEach ( element => {
+  page2Data.forEach ( element => {
     if(element.keyword === $(this).val()){
 
 
@@ -201,5 +202,4 @@ $('#title').on('click', titleSort);
 $('#hornsNum').on('click', hornSort);
 
 //default page if no selection
-$(() => getJsonData(pageOne));
-  
+$(() => getJsonData1(pageOne));
