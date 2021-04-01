@@ -46,6 +46,7 @@ function getJsonData1 (data){
       // render the create horn object
       page1Data.push(hornObject);
       // hornObject.renderWithMustache1();
+
       if(!keywordOne.includes(horn.keyword)){
         keywordOne.push(horn.keyword);}
       $('select').append('<option value ='+ horn.keyword + '>'+ horn.keyword +'</option>');
