@@ -18,14 +18,14 @@
         <input id="pageOne" type="button" value="Page 1"></input>
         <input id="pageTwo" type="button" value="Page 2"></input>
        
-        <select name="animals" id="dropDown">
+        <select name="keywords" id="dropDown">
             <option value="default">Filter by Keyword</option>
               <template id="keywordList">
             <option value="{{keyword}}">{{keyword}}</option>
           </template>
         </select>
-        <input id="title" type="button" value="Sort by Title"></input>
-        <input id="hornsNum" type="button" value="Sort by Horns"></input>
+        <input id="title" type="button" value="Sort by Title">sort by title</input>
+        <input id="hornsNum" type="button" value="Sort by Horns">sort by # of horns</input>
     </header>
 <main>
     <template id="img-template">
@@ -45,9 +45,7 @@
 
   </footer> 
   <script
-    src="https://code.jquery.com/jquery-3.4.0.js"
-    integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
-    crossorigin="anonymous"></script>
+    src="https://code.jquery.com/jquery-3.4.0.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.js"></script>
    <script src="https://unpkg.com/mustache@latest"></script> 
    

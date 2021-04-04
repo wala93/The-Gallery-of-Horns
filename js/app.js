@@ -1,205 +1,142 @@
-// /* eslint-disable no-undef */
-// 'use strict';
-
-// let arrOfObj=[];
-// let arrOfKeyword=[];
-
-// const pageOne = '../data/page-1.json';
-// const pageTwo = '../data/page-2.json';
-
-// const ajaxSettings = {
-//   method: 'get',
-//   dataType: 'json',
-// };
-
-// $.ajax('./data/page-1.json', ajaxSettings).then((arr) => {
-//   arr.forEach((horn) => {
-//     let newObj=new NewHorn(horn).render();
-
-
-//   });
-
-
-  checkkeywords();
-
-
-//   checkkeywords();
-
-// });
-
-
-
-
-
-function NewHorn (horn){
-  this.image_url=horn.image_url;
-  this.title=horn.title;
-  this.description=horn.description;
-  this.keyword=horn.keyword;
-  this.hornsNum=horn.horns;
-  arrOfObj.push(this);
-
-
-// // function NewHorn (horn){
-// //   this.image_url=horn.image_url;
-// //   this.title=horn.title;
-// //   this.description=horn.description;
-// //   this.keyword=horn.keyword;
-// //   this.hornsNum=horn.horns;
-// //   arrOfObj.push(this);
-
-// // }
-
-
-// function NewHorn(horn) {
-//   for(let key in horn){
-//     this[key] = horn[key];
-//   }
-// }
-
-
-// NewHorn.prototype.render = function () {
-//   // let option = $('option').clone();
-//   let $divClone = $('#template').clone();
-//   $('main').append($divClone);
-//   $divClone.find('h2').text(this.title);
-//   $divClone.find('img').attr('src', this.image_url);
-//   $divClone.find('p').text(`${this.description} , the horns no. is ${this.horns}`);
-//   $divClone.removeClass('#template');
-//   $divClone.attr('class', this.keyword);
-//   $('main').append($divClone);
-
-
-// };
-
-
-
-// function checkkeywords(){
-//   arrOfObj.forEach(element=>{
-//     if(!(arrOfKeyword.includes(element.keyword))){
-//       arrOfKeyword.push(element.keyword);
-//       $('select').append(`<option>${element.keyword}</option>`);
-//     }
-//   });
-// }
-// console.log(arrOfKeyword);
-
-
-// $('select').on('change', filter);
-
-// function filter (event){
-//   event.preventDefault();
-//   $('div').hide();
-//   arrOfObj.forEach ( element => {
-//     if(element.keyword === $(this).val()){
-
-
-//       let pickedOne =  $(this).val();
-//       $(`.${pickedOne}`).show();
-//     }
-
-//   }
-//   );
-
-// }
-
-
-
 
 'use strict';
 
-//global variables
+
 const pageOne = './data/page-1.json';
 const pageTwo = './data/page-2.json';
 
+const ajaxSettings = {
+  method: 'get',
+  dataType: 'json',
+};
 
 
 let arrOfObj = [];
-
+let page1Data=[];
+let page2Data=[];
 
 function NewHorn(obj) {
   for(let key in obj){
     this[key] = obj[key];
+    arrOfObj.push(this);
   }
 }
+// console.log(arrOfObj);
 
-NewHorn.prototype.toHtml = function() {
+NewHorn.prototype.rendertoHtml = function() {
   let template = $('#img-template').html();
-  let html = mustache.render(template,this);
-  return html;
+  let html = Mustache.render(template,this);
+  // return html;
+  $('#img-template').append(html);
 };
 
 NewHorn.prototype.toDropdown = function() {
   let template = $('#keywordList').html();
-  let html = mustache.render(template,this);
+  let html = Mustache.render(template,this);
   return html;
-};
-// read json
-const readJson = (pageNumber) => {
 
-  arrOfObj = [];
-  $.get(pageNumber)
-    .then(animalData => {
-      animalData.forEach(animal => {
-        arrOfObj.push(new NewHorn(animal));
-      });
-    })
-    .then(titleSort);
 };
 
-//read global array activate render
-const loadAnimals = () => {
-  arrOfObj.forEach(animal => {
 
-    $('main').append(animal.toHtml());
+let keywordOne=[];
+function getJsonData1 (data){
+  $.ajax('data/page-1.json', ajaxSettings).then((data) => {
+    data.forEach((horn) => {
+      let hornObject = new NewHorn(horn);
+      // render the create horn object
+      page1Data.push(hornObject);
+      // hornObject.renderWithMustache1();
+
+      if(!keywordOne.includes(horn.keyword)){
+        keywordOne.push(horn.keyword);}
+      $('select').append('<option value ='+ horn.keyword + '>'+ horn.keyword +'</option>');
+
+    });
+    dropDrown1();
   });
-  dropDrown();
+}
+
+let keywordTwo=[];
+function getJsonData2 (data){
+  $.ajax('data/page-2.json', ajaxSettings).then((data) => {
+    data.forEach((horn) => {
+      let hornObject = new NewHorn(horn);
+      page2Data.push(hornObject);
+      // hornObject.renderWithMustache1();
+      if(!keywordTwo.includes(horn.keyword)){
+        keywordTwo.push(horn.keyword);}
+      $('select').append('<option value ='+ horn.keyword + '>'+ horn.keyword +'</option>');
+
+    });
+    dropDrown2();
+  });
+}
+
+
+//this function to render the objects (horns)
+const renderHorns = () => {
+  arrOfObj.forEach(horn => {
+
+    $('main').append(horn.toHtml());
+  });
+  dropDrown2();
 };
 
 
 //function to build and display dropdown menu
-const dropDrown = () => {
-  arrOfObj.forEach(animal => {
+const dropDrown1 = () => {
+  page1Data.forEach(horn => {
     let exists = false;
     $('#dropDown option').each(function(){
-      if(this.value === animal.keyword){
+      if(this.value === horn.keyword){
         exists = true;
       }
     });
     if(exists === false){
-      //add element to parent
-      $('select').append(animal.toDropdown());
 
-
+      $('select').append(horn.toDropdown());
     }
   });
 };
 
-//Event handler function
-let animalSelector = (event) => {
-  $('div').hide();
-  let img = $(`img[value="${event.target.value}"]`).parent();
-  $(img).show();
+const dropDrown2 = () => {
+  page2Data.forEach(horn => {
+    let exists = false;
+    $('#dropDown option').each(function(){
+      if(this.value === horn.keyword){
+        exists = true;
+      }
+    });
+    if(exists === false){
+
+      $('select').append(horn.toDropdown());
+    }
+  });
 };
 
-//Drop-down list event handler
-$('#dropDown').on('change', animalSelector);
 
-// Json page selector functions
-let pageOneSelector = () => {
-  // Animal.holdingArray = [];
+
+$('#dropDown').on('change', filter1);
+
+$('#dropDown').on('change', filter2);
+
+function pageOneSelector (pageNum) {
+
   $('div').remove();
-  readJson(pageOne);
-};
+  getJsonData1(pageOne);
+  dropDrown1();
+}
+
 let pageTwoSelector = () => {
-  // Animal.holdingArray = [];
+
   $('div').remove();
-  readJson(pageTwo);
+  getJsonData2(pageTwo);
+  dropDrown2();
 };
 
-//Sort functions
+
 let titleSort = () => {
-  arrOfObj.forEach( (element) => {
+  arrOfObj.forEach( (horn) => {
     arrOfObj.sort( (a,b) => {
       if(a.title < b.title){
         return -1;
@@ -209,44 +146,62 @@ let titleSort = () => {
       }
       return 0;
     });
+
     return arrOfObj;
   });
   $('div').remove();
-  loadAnimals();
+  renderHorns();
 };
 
-// function filter (event){
-//   event.preventDefault();
-//   $('div').hide();
-//   arrOfObj.forEach ( element => {
-//     if(element.keyword === $(this).val()){
+function filter1 (event){
+  event.preventDefault();
+  $('div').hide();
+  page1Data.forEach ( element => {
+    if(element.keyword === $(this).val()){
 
 
-//       let pickedOne =  $(this).val();
-//       $(`.${pickedOne}`).show();
-//     }
+      let pickedOne =  $(this).val();
+      $(`.${pickedOne}`).show();
+    }
 
-//   }
-//   );
+  }
+  );
+}
 
+function filter2 (event){
+  event.preventDefault();
+  $('div').hide();
+  page2Data.forEach ( element => {
+    if(element.keyword === $(this).val()){
+
+
+      let pickedOne =  $(this).val();
+      $(`.${pickedOne}`).show();
+    }
+
+  }
+  );
+}
 
 let hornSort = () => {
-  arrOfObj.forEach( (element) => {
+  arrOfObj.forEach( (horn) => {
     arrOfObj.sort( (a,b) => {
       return a.horns - b.horns;
     });
     return arrOfObj;
   });
+
   $('div').remove();
-  loadAnimals();
+  renderHorns();
 };
 
-//Button event handlers to switch pages
+
 $('#pageOne').on('click', pageOneSelector);
 $('#pageTwo').on('click', pageTwoSelector);
 
-//Button event handlers to sort
+
 $('#title').on('click', titleSort);
 $('#hornsNum').on('click', hornSort);
-//start it off
-$(() => readJson(pageOne));
+
+//default page if no selection
+$(() => getJsonData1(pageOne));
