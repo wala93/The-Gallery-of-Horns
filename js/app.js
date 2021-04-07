@@ -11,6 +11,7 @@ const ajaxSettings = {
 };
 
 
+let keywordOne=[];
 let arrOfObj = [];
 let page1Data=[];
 let page2Data=[];
@@ -18,8 +19,8 @@ let page2Data=[];
 function NewHorn(obj) {
   for(let key in obj){
     this[key] = obj[key];
-    arrOfObj.push(this);
   }
+  arrOfObj.push(this);
 }
 // console.log(arrOfObj);
 
@@ -38,7 +39,6 @@ NewHorn.prototype.toDropdown = function() {
 };
 
 
-let keywordOne=[];
 function getJsonData1 (data){
   $.ajax('data/page-1.json', ajaxSettings).then((data) => {
     data.forEach((horn) => {
