@@ -1,3 +1,54 @@
 img {width : 150px;
 height: auto;}
 
+.container {
+
+    width: 80%;
+    margin: auto ;
+    background-color:bisque ;
+
+}
+
+.subcontainer{
+
+   margin-left:40%;
+    display: inline;
+    width: 30%;
+    /* float: left; */
+    /* border: darkslateblue;
+    border-style: groove; */
+}
+header{
+     align-content: center;
+     background-color: cadetblue;
+     height: 100px;
+}
+
+h1{
+font-weight: bolder;
+    font-size: x-large;
+color: cornsilk;
+align-content: center;
+display: inline;
+width: 40%;
+margin-left:40%;
+}
+
+select {
+
+    display: inline;
+    /* width: 40%; */
+    margin-left:40%;
+    background-color: rgb(187, 185, 185);
+    border-radius:10px ;
+    width:160px;
+    height: 30px;
+
+}
+h2 {font-weight: bold;
+margin-top: 20px;}
+
+p{
+    margin-bottom: 20px;
+    font-weight: 700 ;
+}
