@@ -40,24 +40,40 @@ NewHorn.prototype.toDropdown = function() {
 
 
 function getJsonData1 (data){
+  var select = document.getElementById("dropDown");
+  var i=0;
+  var length = select.options.length;
+  for (i = length-1; i >= 0; i--) {
+    select.options[i] = null;
+  }
   $.ajax('data/page-1.json', ajaxSettings).then((data) => {
     data.forEach((horn) => {
       let hornObject = new NewHorn(horn);
       // render the create horn object
       page1Data.push(hornObject);
-      // hornObject.renderWithMustache1();
 
+
+     // console.log(arrOfObj);
+      // hornObject.renderWithMustache1();
+     
       if(!keywordOne.includes(horn.keyword)){
         keywordOne.push(horn.keyword);}
       $('select').append('<option value ='+ horn.keyword + '>'+ horn.keyword +'</option>');
 
     });
+    renderHorns();
     dropDrown1();
   });
 }
 
 let keywordTwo=[];
 function getJsonData2 (data){
+  var select = document.getElementById("dropDown");
+  var i=0;
+  var length = select.options.length;
+  for (i = length-1; i >= 0; i--) {
+    select.options[i] = null;
+  }
   $.ajax('data/page-2.json', ajaxSettings).then((data) => {
     data.forEach((horn) => {
       let hornObject = new NewHorn(horn);
@@ -75,11 +91,12 @@ function getJsonData2 (data){
 
 //this function to render the objects (horns)
 const renderHorns = () => {
+  console.log(arrOfObj);
   arrOfObj.forEach(horn => {
 
     $('main').append(horn.toHtml());
   });
-  dropDrown2();
+//  dropDrown2();
 };
 
 
@@ -120,18 +137,19 @@ $('#dropDown').on('change', filter1);
 
 $('#dropDown').on('change', filter2);
 
-function pageOneSelector (pageNum) {
+function pageOneSelector () {
 
   $('div').remove();
   getJsonData1(pageOne);
   dropDrown1();
+  
 }
 
 let pageTwoSelector = () => {
 
   $('div').remove();
   getJsonData2(pageTwo);
-  dropDrown2();
+
 };
 
 
