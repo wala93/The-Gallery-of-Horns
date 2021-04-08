@@ -41,9 +41,10 @@ NewHorn.prototype.render = function () {
   $('main').append($divClone);
   $divClone.find('h2').text(this.title);
   $divClone.find('img').attr('src', this.image_url);
-  $divClone.find('p').text(`${this.description} , the horns no. is ${this.horns}`);
+  $divClone.find('p').text(`${this.description} , the horns no. is ${this.hornsNum}`);
   $divClone.removeClass('#template');
-  $divClone.attr('class', this.keyword);
+  $divClone.attr('class', this.keyword+' '+'pic');
+
   $('main').append($divClone);
 
 
@@ -66,6 +67,7 @@ $('select').on('change', filter);
 
 function filter (event){
   event.preventDefault();
+
   $('div').hide();
   arrOfObj.forEach ( element => {
     if(element.keyword === $(this).val()){

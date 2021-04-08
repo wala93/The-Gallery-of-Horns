@@ -1,11 +1,15 @@
-img {width : 150px;
-height: auto;}
+img {
+    width: 141px;
+    height: 160px;
+
+}
 
 .container {
 
-    width: 80%;
-    margin: auto ;
-    background-color:bisque ;
+    margin: auto;
+    background-color: #f7f7f7;
+    padding: 0px 46px;
+  
 
 }
 
@@ -14,14 +18,17 @@ height: auto;}
    margin-left:40%;
     display: inline;
     width: 30%;
+    display: none;
     /* float: left; */
     /* border: darkslateblue;
     border-style: groove; */
 }
 header{
-     align-content: center;
-     background-color: cadetblue;
-     height: 100px;
+    padding: 25px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 30px;
 }
 
 h1{
@@ -30,25 +37,40 @@ font-weight: bolder;
 color: cornsilk;
 align-content: center;
 display: inline;
-width: 40%;
-margin-left:40%;
+
 }
 
-select {
+.pic {
+    float: left;
+    width: 23.33%;
+    padding: 10px;
+    height: 300px;
+  }
 
+  .pic-container{
+ content: "";
+  display: table;
+  clear: both;
+
+  }
+
+select {
     display: inline;
     /* width: 40%; */
-    margin-left:40%;
-    background-color: rgb(187, 185, 185);
-    border-radius:10px ;
-    width:160px;
-    height: 30px;
+    /* margin-left: 40%; */
+    background-color: #c7f5ec;
+    border-radius: 10px;
+    width: 264px;
+    height: 36px;
+    margin-top: 25px;
 
 }
 h2 {font-weight: bold;
-margin-top: 20px;}
+    margin: 14px 18px;
+}
 
 p{
-    margin-bottom: 20px;
-    font-weight: 700 ;
+    font-weight: 700;
+    width: 207px;
+    margin: 18px 1px;
 }
